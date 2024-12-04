@@ -1,30 +1,30 @@
-import java.util.Scanner;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class MixPlus {
-    private static final Pattern HEX_PATTERN = Pattern.compile("0[xX][0-9a-fA-F]+");
-
-    public static void main(String[] args) {
-        String sixteen = "0x";
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if(input == null) {
-            System.out.println("ERROR");
-            return;
-        }
-        String[] inputs = input.split(" ");  //分离出./mixplus
-        if(inputs.length != 3) {  //两数和，多个或少于都会错误
-            System.out.println("ERROR");
-            return;
-        }
-        try{Integer num1 = convertToDecimal(inputs[1]);
-            Integer num2 = convertToDecimal(inputs[2]);
-            String hexString = Integer.toHexString(num1 + num2);
-            hexString = sixteen +hexString;  //加上"0x"的前缀
-            System.out.println(hexString);
-            System.out.println(num1 + num2);
-        }catch (Exception e) {
-            System.out.println("ERROR");  //匹配失败
+    public void MixPlusCheck(List<String> inputs) {
+        for (String input : inputs) {
+            Pattern HEX_PATTERN = Pattern.compile("0[xX][0-9a-fA-F]+");
+            String sixteen = "0x";
+            if (input == null) {
+                System.out.println("ERROR");
+                return;
+            }
+            String[] inputArray = input.split(" ");  //分离出./mixplus
+            if (inputArray.length != 3) {  //两数和，多个或少于都会错误
+                System.out.println("ERROR");
+                return;
+            }
+            try {
+                Integer num1 = convertToDecimal(inputArray[1]);
+                Integer num2 = convertToDecimal(inputArray[2]);
+                String hexString = Integer.toHexString(num1 + num2);
+                hexString = sixteen + hexString;  //加上"0x"的前缀
+                System.out.println(hexString);
+                System.out.println(num1 + num2);
+            } catch (Exception e) {
+                System.out.println("ERROR");  //匹配失败
+            }
         }
     }
 
